@@ -1,4 +1,5 @@
 import xml.etree.ElementTree as ET
+from xml.dom import minidom
 from data_saver import DataSaver
 
 class XmlSaver(DataSaver):
@@ -25,5 +26,9 @@ class XmlSaver(DataSaver):
             ET.SubElement(subj_elem, "average").text = str(data["desired_performance"]["average_per_subject"][subj])
         ET.SubElement(desired_elem, "overall_average").text = str(data["desired_performance"]["overall_average"])
 
-        tree = ET.ElementTree(student_elem)
-        tree.write(filename, encoding="utf-8", xml_declaration=True)
+        xml_str = ET.tostring(student_elem, encoding="utf-8")
+        dom = minidom.parseString(xml_str)
+        pretty_xml = dom.toprettyxml(indent="  ", encoding="utf-8")
+        
+        with open(filename, "wb") as f:
+            f.write(pretty_xml)
