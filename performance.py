@@ -1,7 +1,7 @@
 from abc import ABC, abstractmethod
 
 class Performance(ABC):
-    def __init__(self, subjects: list[str], grades: list[float]):
+    def __init__(self, subjects: list[str], grades: dict[str, list[float]]):
         self.__subjects = subjects
         self.__grades = grades
 
@@ -12,5 +12,9 @@ class Performance(ABC):
         return self.__grades
 
     @abstractmethod
-    def average_grade(self):
+    def average_grade_per_subject(self):
+        pass
+
+    @abstractmethod
+    def overall_average(self):
         pass
