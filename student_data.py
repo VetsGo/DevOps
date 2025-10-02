@@ -15,10 +15,12 @@ class StudentData:
             "real_performance": {
                 "subjects": self.__real_performance.get_subjects(),
                 "grades": self.__real_performance.get_grades(),
-                "average": self.__real_performance.average_grade()
+                "average_per_subject": self.__real_performance.average_grade_per_subject(),
+                "overall_average": self.__real_performance.overall_average()
             },
             "desired_performance": {
                 "desired_grades": self.__desired_performance.get_grades(),
-                "desired_average": self.__desired_performance.average_grade()
+                "average_per_subject": self.__desired_performance.average_grade_per_subject(),
+                "overall_average": self.__desired_performance.overall_average()
             }
         }
