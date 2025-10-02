@@ -1,24 +1,10 @@
 from student import Student
-from performance import Performance
+from real_performance import RealPerformance
 from desired_performance import DesiredPerformance
 from student_data import StudentData
 from formats.json_saver import JsonSaver
 from formats.xml_saver import XmlSaver
 from formats.csv_saver import CsvSaver
-
-class RealPerformance(Performance):
-    def average_grade_per_subject(self):
-        averages = {}
-        for subject in self.get_subjects():
-            grades = self.get_grades()[subject]
-            averages[subject] = sum(grades) / len(grades) if grades else 0
-        return averages
-
-    def overall_average(self):
-        all_averages = self.average_grade_per_subject()
-        if not all_averages:
-            return 0
-        return sum(all_averages.values()) / len(all_averages)
 
 def main():
     student = Student("Ridkovets Serhii", "PD-51")
