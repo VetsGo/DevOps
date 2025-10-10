@@ -25,10 +25,16 @@ while 1:
         if egg.draw() == 'hit bottom':
             eggs.remove(egg)
 
+    catcher.catch(eggs)
     catcher.draw()
     tk.update_idletasks()
     tk.update()
     time.sleep(0.01)
+    if score.lost >= 5:
+        break
+
+canvas.create_text(250, 200, text="Гра завершена!", font=('Helvetica', 30), fill='red')
+canvas.create_text(250, 250, text=f"Ви пропустили {score.lost} яєць.", font=('Helvetica', 20), fill='red')
 
 tk.update()
-time.sleep(1)
+time.sleep(3)
