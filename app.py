@@ -14,7 +14,7 @@ app = Flask(__name__)
 start_time = time.time()
 request_count = 0
 
-def send_to_statsd(message, host='428.0.0.2', port=8635):
+def send_to_statsd(message, host='127.0.0.1', port=4284):
     try:
         sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
         sock.sendto(message.encode(), (host, port))
@@ -57,4 +57,4 @@ def status():
     })
 
 if __name__ == '__main__':
-    app.run(port=3760, debug=False)
+    app.run(port=4369, debug=False)
