@@ -33,10 +33,12 @@ EMAIL_HOST_PASSWORD = 'hecaetdkxaxhbcwf'
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
 
-
+SITE_ID = 1
 # Application definition
 
 INSTALLED_APPS = [
+    'django.contrib.sites',
+    'django.contrib.sitemaps',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
