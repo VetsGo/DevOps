@@ -51,6 +51,40 @@ def home():
     </html>
     '''
 
+@app.route('/messages')
+def messages():
+    try:
+        conn = get_db_connection()
+        cur = conn.cursor()
+        
+        cur.execute("INSERT INTO messages (content) VALUES (%s) RETURNING id", 
+                   (f"Запит виконано",))
+        new_id = cur.fetchone()[0]
+        conn.commit()
+        
+        cur.execute("SELECT id, content, created_at FROM messages ORDER BY created_at DESC LIMIT 10")
+        rows = cur.fetchall()
+        
+        cur.close()
+        conn.close()
+        
+        messages_list = []
+        for row in rows:
+            messages_list.append({
+                'id': row[0],
+                'content': row[1],
+                'created_at': str(row[2])
+            })
+        
+        html = '<html><body><h1>Список повідомлень</h1><ul>'
+        for msg in messages_list:
+            html += f'<li>ID: {msg["id"]}, Текст: {msg["content"]}, Час: {msg["created_at"]}</li>'
+        html += '</ul><a href="/">На головну</a></body></html>'
+        
+        return html
+    except Exception as e:
+        return f'<html><body><h1>Помилка</h1><p>{str(e)}</p><a href="/">На головну</a></body></html>'
+
 if __name__ == '__main__':
     init_db()
     app.run(host='0.0.0.0', port=5000, debug=True)
