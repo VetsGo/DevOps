@@ -12,9 +12,9 @@ def get_db_connection():
         try:
             conn = psycopg2.connect(
                 host=os.environ.get('DB_HOST', 'db'),
-                database=os.environ.get('DB_NAME', 'mydb'),
-                user=os.environ.get('DB_USER', 'myuser'),
-                password=os.environ.get('DB_PASSWORD', 'mypassword')
+                database=os.environ.get('DB_NAME', 'lastdb'),
+                user=os.environ.get('DB_USER', 'lastuser'),
+                password=os.environ.get('DB_PASSWORD', 'sermoji428')
             )
             return conn
         except psycopg2.OperationalError:
